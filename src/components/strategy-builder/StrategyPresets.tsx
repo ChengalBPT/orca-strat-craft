@@ -103,12 +103,12 @@ export const StrategyPresets: React.FC<StrategyPresetsProps> = ({ onApplyStrateg
             key={index}
             variant="outline"
             onClick={() => onApplyStrategy(strategy)}
-            className={`h-auto p-2 flex flex-col items-center gap-1.5 text-center transition-all ${getStrategyColor(strategy.name)}`}
+            className={`h-auto p-2 flex flex-col items-center gap-1.5 text-center transition-all min-h-[70px] ${getStrategyColor(strategy.name)}`}
           >
-            <div className="flex items-center justify-center w-6 h-6 rounded-full bg-muted">
+            <div className="flex items-center justify-center w-6 h-6 rounded-full bg-muted flex-shrink-0">
               {getStrategyIcon(strategy.name)}
             </div>
-            <span className="text-xs font-medium leading-tight line-clamp-2 break-words">
+            <span className="text-xs font-medium leading-tight line-clamp-2 break-words hyphens-auto overflow-hidden">
               {strategy.name}
             </span>
           </Button>

@@ -35,6 +35,7 @@ const StrategyBuilder = () => {
   const [maxProfit, setMaxProfit] = useState(6442.50);
   const [maxLoss, setMaxLoss] = useState(-8557.50);
   const [breakeven, setBreakeven] = useState([25114.10, 25285.90]);
+  const [multiplier, setMultiplier] = useState(1);
 
   // Sample initial trades for Bull Butterfly
   useEffect(() => {
@@ -97,6 +98,21 @@ const StrategyBuilder = () => {
     setTrades(newTrades);
   };
 
+  // Calculate total premium and price to pay
+  const calculateTotals = () => {
+    const totalPremium = trades.reduce((sum, trade) => {
+      const premium = trade.lots * trade.price * 25; // 25 is lot size
+      return sum + (trade.side === 'BUY' ? premium : -premium);
+    }, 0);
+    
+    return {
+      priceToPay: Math.abs(totalPremium) * multiplier,
+      premiumToPay: totalPremium * multiplier
+    };
+  };
+
+  const { priceToPay, premiumToPay } = calculateTotals();
+
   return (
     <div className="min-h-screen bg-background p-3">
       {/* Header */}
@@ -127,21 +143,50 @@ const StrategyBuilder = () => {
               onRemoveTrade={removeTrade}
               onUpdateTrade={updateTrade}
             />
+            
+            {/* Price Display and Multiplier */}
+            <div className="flex items-center justify-between mt-4 pt-4 border-t border-border">
+              <div className="flex gap-6">
+                <div className="text-sm">
+                  <span className="text-muted-foreground">Price to Pay: </span>
+                  <span className="font-medium text-foreground">₹{priceToPay.toLocaleString()}</span>
+                </div>
+                <div className="text-sm">
+                  <span className="text-muted-foreground">Premium to Pay: </span>
+                  <span className={`font-medium ${premiumToPay >= 0 ? 'text-profit' : 'text-loss'}`}>
+                    ₹{premiumToPay.toLocaleString()}
+                  </span>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-muted-foreground">Multiplier:</span>
+                <div className="flex items-center border border-border rounded-lg">
+                  <button
+                    onClick={() => setMultiplier(Math.max(1, multiplier - 1))}
+                    className="px-2 py-1 text-sm hover:bg-muted rounded-l-lg"
+                    disabled={multiplier <= 1}
+                  >
+                    -
+                  </button>
+                  <span className="px-3 py-1 text-sm font-medium min-w-[40px] text-center border-x border-border">
+                    {multiplier}
+                  </span>
+                  <button
+                    onClick={() => setMultiplier(multiplier + 1)}
+                    className="px-2 py-1 text-sm hover:bg-muted rounded-r-lg"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            </div>
           </Card>
 
           {/* Strategy Presets */}
           <div className="animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
             <StrategyPresets onApplyStrategy={applyStrategy} />
           </div>
-
-          {/* Payoff Chart */}
-          <Card className="p-4 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-            <PayoffChart
-              trades={trades}
-              targetPrice={targetPrice}
-              spotPrice={25362.60}
-            />
-          </Card>
         </div>
 
         {/* Right Column - 60% width, scrollable */}
@@ -168,8 +213,17 @@ const StrategyBuilder = () => {
             </div>
           </div>
 
+          {/* Payoff Chart */}
+          <Card className="p-4 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
+            <PayoffChart
+              trades={trades}
+              targetPrice={targetPrice}
+              spotPrice={25362.60}
+            />
+          </Card>
+
           {/* Target Controls */}
-          <div className="animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
+          <div className="animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
             <TargetControls
               targetPrice={targetPrice}
               targetDate={targetDate}
@@ -179,7 +233,7 @@ const StrategyBuilder = () => {
           </div>
 
           {/* Greeks */}
-          <div className="animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+          <div className="animate-fade-in-up" style={{ animationDelay: '0.7s' }}>
             <GreeksDisplay
               delta={0.52}
               theta={22.41}
@@ -190,7 +244,7 @@ const StrategyBuilder = () => {
           </div>
 
           {/* IV Table */}
-          <div className="animate-fade-in-up" style={{ animationDelay: '0.7s' }}>
+          <div className="animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
             <IVTable />
           </div>
         </div>
