@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card } from '@/components/ui/card';
+import { AnimatedNumber } from '@/components/ui/animated-number';
 import { TrendingUp, TrendingDown, Target } from 'lucide-react';
 
 interface OverviewBoxProps {
@@ -27,7 +28,10 @@ export const OverviewBox: React.FC<OverviewBoxProps> = ({
             <span className="text-sm text-muted-foreground">Max Profit</span>
           </div>
           <span className="font-semibold text-profit">
-            ₹{maxProfit.toLocaleString()}
+            ₹<AnimatedNumber 
+              value={maxProfit} 
+              formatFn={(val) => val.toLocaleString()}
+            />
           </span>
         </div>
 
@@ -38,7 +42,10 @@ export const OverviewBox: React.FC<OverviewBoxProps> = ({
             <span className="text-sm text-muted-foreground">Max Loss</span>
           </div>
           <span className="font-semibold text-loss">
-            ₹{maxLoss.toLocaleString()}
+            ₹<AnimatedNumber 
+              value={Math.abs(maxLoss)} 
+              formatFn={(val) => val.toLocaleString()}
+            />
           </span>
         </div>
 

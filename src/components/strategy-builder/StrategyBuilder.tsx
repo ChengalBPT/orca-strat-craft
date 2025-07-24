@@ -98,9 +98,9 @@ const StrategyBuilder = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background p-4 space-y-6">
+    <div className="min-h-screen bg-background p-3">
       {/* Header */}
-      <div className="flex flex-col lg:flex-row gap-4">
+      <div className="flex flex-col lg:flex-row gap-3 mb-3">
         <div className="flex-1">
           <InstrumentSelector
             selectedInstrument={selectedInstrument}
@@ -114,13 +114,13 @@ const StrategyBuilder = () => {
         </div>
       </div>
 
-      {/* Main Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left Column */}
-        <div className="lg:col-span-2 space-y-6">
+      {/* Main Content Layout - 40/60 split */}
+      <div className="flex gap-3 h-[calc(100vh-120px)]">
+        {/* Left Column - 40% width, static */}
+        <div className="w-[40%] space-y-3">
           {/* Strategy Table */}
-          <Card className="p-6">
-            <h2 className="text-lg font-semibold mb-4">Strategy Builder</h2>
+          <Card className="p-4 animate-fade-in-up">
+            <h2 className="text-lg font-semibold mb-4 text-foreground">Strategy Builder</h2>
             <TradeTable
               trades={trades}
               onAddTrade={addTrade}
@@ -130,10 +130,12 @@ const StrategyBuilder = () => {
           </Card>
 
           {/* Strategy Presets */}
-          <StrategyPresets onApplyStrategy={applyStrategy} />
+          <div className="animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+            <StrategyPresets onApplyStrategy={applyStrategy} />
+          </div>
 
           {/* Payoff Chart */}
-          <Card className="p-6">
+          <Card className="p-4 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
             <PayoffChart
               trades={trades}
               targetPrice={targetPrice}
@@ -142,45 +144,55 @@ const StrategyBuilder = () => {
           </Card>
         </div>
 
-        {/* Right Column */}
-        <div className="space-y-6">
-          {/* Overview */}
-          <OverviewBox
-            maxProfit={maxProfit}
-            maxLoss={maxLoss}
-            breakeven={breakeven}
-            riskReward={1.33}
-          />
-
-          {/* Summary */}
-          <SummaryBox
-            pop={8.46}
-            availableFunds={107600.50}
-            reqMargin={246537.45}
-            marginBenefit={162215.75}
-            finalMargin={84321.70}
-            numberOfLegs={trades.length}
-          />
+        {/* Right Column - 60% width, scrollable */}
+        <div className="w-[60%] overflow-y-auto space-y-3 pr-2">
+          {/* Top Row - Overview and Summary side by side */}
+          <div className="grid grid-cols-2 gap-3">
+            <div className="animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+              <OverviewBox
+                maxProfit={maxProfit}
+                maxLoss={maxLoss}
+                breakeven={breakeven}
+                riskReward={1.33}
+              />
+            </div>
+            <div className="animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+              <SummaryBox
+                pop={8.46}
+                availableFunds={107600.50}
+                reqMargin={246537.45}
+                marginBenefit={162215.75}
+                finalMargin={84321.70}
+                numberOfLegs={trades.length}
+              />
+            </div>
+          </div>
 
           {/* Target Controls */}
-          <TargetControls
-            targetPrice={targetPrice}
-            targetDate={targetDate}
-            onTargetPriceChange={setTargetPrice}
-            onTargetDateChange={setTargetDate}
-          />
+          <div className="animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
+            <TargetControls
+              targetPrice={targetPrice}
+              targetDate={targetDate}
+              onTargetPriceChange={setTargetPrice}
+              onTargetDateChange={setTargetDate}
+            />
+          </div>
 
           {/* Greeks */}
-          <GreeksDisplay
-            delta={0.52}
-            theta={22.41}
-            decay={0.17}
-            gamma={-0.0013}
-            vega={-1.50}
-          />
+          <div className="animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+            <GreeksDisplay
+              delta={0.52}
+              theta={22.41}
+              decay={0.17}
+              gamma={-0.0013}
+              vega={-1.50}
+            />
+          </div>
 
           {/* IV Table */}
-          <IVTable />
+          <div className="animate-fade-in-up" style={{ animationDelay: '0.7s' }}>
+            <IVTable />
+          </div>
         </div>
       </div>
     </div>
