@@ -97,18 +97,18 @@ export const StrategyPresets: React.FC<StrategyPresetsProps> = ({ onApplyStrateg
         <p className="text-sm text-muted-foreground">Choose from popular options strategies</p>
       </div>
       
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
+      <div className="flex flex-wrap gap-2 justify-center">
         {strategies.map((strategy, index) => (
           <Button
             key={index}
             variant="outline"
             onClick={() => onApplyStrategy(strategy)}
-            className={`h-auto p-2 flex flex-col items-center gap-1.5 text-center transition-all min-h-[70px] ${getStrategyColor(strategy.name)}`}
+            className={`h-auto px-3 py-2 flex items-center gap-2 text-center transition-all rounded-full w-fit ${getStrategyColor(strategy.name)}`}
           >
-            <div className="flex items-center justify-center w-6 h-6 rounded-full bg-muted flex-shrink-0">
+            <div className="flex items-center justify-center w-4 h-4 rounded-full bg-muted flex-shrink-0">
               {getStrategyIcon(strategy.name)}
             </div>
-            <span className="text-xs font-medium leading-tight line-clamp-2 break-words hyphens-auto overflow-hidden">
+            <span className="text-xs font-medium whitespace-nowrap">
               {strategy.name}
             </span>
           </Button>
@@ -116,7 +116,11 @@ export const StrategyPresets: React.FC<StrategyPresetsProps> = ({ onApplyStrateg
       </div>
       
       <div className="mt-4 text-center">
-        <Button variant="ghost" size="sm" className="text-primary">
+        <Button 
+          size="sm" 
+          className="rounded-full px-6 py-2 text-white font-medium"
+          style={{ backgroundColor: '#1EC088' }}
+        >
           Build on your own →
         </Button>
       </div>
