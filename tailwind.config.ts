@@ -61,7 +61,33 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// Trading specific colors
+				success: {
+					DEFAULT: 'hsl(var(--success))',
+					foreground: 'hsl(var(--success-foreground))'
+				},
+				profit: 'hsl(var(--profit))',
+				loss: 'hsl(var(--loss))',
+				neutral: 'hsl(var(--neutral))',
+				chart: {
+					profit: 'hsl(var(--chart-profit))',
+					loss: 'hsl(var(--chart-loss))',
+					breakeven: 'hsl(var(--chart-breakeven))',
+					grid: 'hsl(var(--chart-grid))'
+				},
+				hover: 'hsl(var(--hover))',
+				active: 'hsl(var(--active))'
+			},
+			boxShadow: {
+				'sm': 'var(--shadow-sm)',
+				'md': 'var(--shadow-md)',
+				'lg': 'var(--shadow-lg)'
+			},
+			transitionProperty: {
+				'fast': 'var(--transition-fast)',
+				'smooth': 'var(--transition-smooth)',
+				'spring': 'var(--transition-spring)'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
