@@ -97,18 +97,20 @@ export const StrategyPresets: React.FC<StrategyPresetsProps> = ({ onApplyStrateg
         <p className="text-sm text-muted-foreground">Choose from popular options strategies</p>
       </div>
       
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
         {strategies.map((strategy, index) => (
           <Button
             key={index}
             variant="outline"
             onClick={() => onApplyStrategy(strategy)}
-            className={`h-auto p-3 flex flex-col items-center gap-2 text-center transition-all ${getStrategyColor(strategy.name)}`}
+            className={`h-auto p-2 flex flex-col items-center gap-1.5 text-center transition-all ${getStrategyColor(strategy.name)}`}
           >
-            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-muted">
+            <div className="flex items-center justify-center w-6 h-6 rounded-full bg-muted">
               {getStrategyIcon(strategy.name)}
             </div>
-            <span className="text-xs font-medium leading-tight">{strategy.name}</span>
+            <span className="text-xs font-medium leading-tight line-clamp-2 break-words">
+              {strategy.name}
+            </span>
           </Button>
         ))}
       </div>
