@@ -117,7 +117,7 @@ export const StrategyPresets: React.FC<StrategyPresetsProps> = ({ onApplyStrateg
             <div className="flex items-center justify-center w-4 h-4 rounded-full bg-muted flex-shrink-0">
               {getStrategyIcon(strategy.name)}
             </div>
-            <span className="text-xs font-medium whitespace-nowrap">
+            <span className="text-sm font-medium whitespace-nowrap">
               {strategy.name}
             </span>
           </Button>

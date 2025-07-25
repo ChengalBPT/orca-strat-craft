@@ -86,13 +86,13 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({ trades }) => {
       </Button>
       
       {!hasValidTrades && (
-        <p className="text-xs text-muted-foreground text-center">
+        <p className="text-sm text-muted-foreground text-center">
           Add at least one trade to review
         </p>
       )}
       
       {hasValidTrades && !hasCompleteData && (
-        <p className="text-xs text-muted-foreground text-center">
+        <p className="text-sm text-muted-foreground text-center">
           Complete all trade details to review
         </p>
       )}

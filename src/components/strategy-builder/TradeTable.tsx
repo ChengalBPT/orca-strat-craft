@@ -47,7 +47,7 @@ export const TradeTable: React.FC<TradeTableProps> = ({
       {/* Table */}
       <div className="border rounded-lg overflow-hidden">
         {/* Table Header */}
-        <div className="grid grid-cols-[60px_120px_80px_50px_80px_90px_40px] gap-0 px-4 py-3 bg-muted/50 text-xs font-medium text-muted-foreground border-b">
+        <div className="grid grid-cols-[60px_120px_80px_50px_80px_90px_40px] gap-0 px-4 py-3 bg-muted/50 text-sm font-medium text-muted-foreground border-b">
           <div>B/S</div>
           <div>Expiry</div>
           <div>Strike</div>
@@ -61,7 +61,7 @@ export const TradeTable: React.FC<TradeTableProps> = ({
         {trades.map((trade) => (
           <div key={trade.id} className="grid grid-cols-[60px_120px_80px_50px_80px_90px_40px] gap-0 px-4 py-3 border-b border-border/50 items-center hover:bg-muted/20">
             <div className="flex items-center">
-              <span className={`text-xs font-medium ${
+              <span className={`text-sm font-medium ${
                 trade.side === 'BUY' ? 'text-profit' : 'text-loss'
               }`}>
                 {trade.side}
@@ -69,7 +69,7 @@ export const TradeTable: React.FC<TradeTableProps> = ({
             </div>
             <div className="flex items-center">
               <Select value={trade.expiry} onValueChange={(value) => onUpdateTrade(trade.id, { expiry: value })}>
-                <SelectTrigger className="h-7 border-0 p-0 text-xs font-normal bg-transparent shadow-none focus:ring-0 hover:bg-transparent [&>svg]:hidden">
+                <SelectTrigger className="h-7 border-0 p-0 text-sm font-normal bg-transparent shadow-none focus:ring-0 hover:bg-transparent [&>svg]:hidden">
                   <div className="flex items-center gap-1">
                     <span>{trade.expiry}</span>
                     <ChevronDown className="h-3 w-3" />
@@ -83,10 +83,10 @@ export const TradeTable: React.FC<TradeTableProps> = ({
               </Select>
             </div>
             <div className="flex items-center justify-start">
-              <span className="text-xs font-medium">{trade.strike}</span>
+              <span className="text-sm font-medium">{trade.strike}</span>
             </div>
             <div className="flex items-center justify-start">
-              <span className={`text-xs ${
+              <span className={`text-sm ${
                 trade.type === 'CE' ? 'text-blue-600' : 'text-purple-600'
               }`}>
                 {trade.type}
@@ -96,17 +96,17 @@ export const TradeTable: React.FC<TradeTableProps> = ({
               <div className="flex items-center border border-border rounded-lg w-fit">
                 <button
                   onClick={() => onUpdateTrade(trade.id, { lots: Math.max(1, trade.lots - 1) })}
-                  className="px-2 py-1 text-xs hover:bg-muted rounded-l-lg"
+                  className="px-2 py-1 text-sm hover:bg-muted rounded-l-lg"
                   disabled={trade.lots <= 1}
                 >
                   -
                 </button>
-                <span className="px-2 py-1 text-xs font-medium min-w-[30px] text-center border-x border-border">
+                <span className="px-2 py-1 text-sm font-medium min-w-[30px] text-center border-x border-border">
                   {trade.lots}
                 </span>
                 <button
                   onClick={() => onUpdateTrade(trade.id, { lots: trade.lots + 1 })}
-                  className="px-2 py-1 text-xs hover:bg-muted rounded-r-lg"
+                  className="px-2 py-1 text-sm hover:bg-muted rounded-r-lg"
                 >
                   +
                 </button>
@@ -117,7 +117,7 @@ export const TradeTable: React.FC<TradeTableProps> = ({
                 type="number"
                 value={trade.price}
                 onChange={(e) => onUpdateTrade(trade.id, { price: parseFloat(e.target.value) || 0 })}
-                className="h-7 w-full text-xs bg-white"
+                className="h-7 w-full text-sm bg-white"
                 step="0.05"
               />
             </div>

@@ -36,7 +36,7 @@ export const IVTable: React.FC = () => {
           {ivData.map((item, index) => (
             <div key={index} className="mb-6">
               <div className="text-sm font-medium mb-2">₹{item.strike.toLocaleString()}</div>
-              <div className="text-xs text-muted-foreground mb-3">{item.date}</div>
+              <div className="text-sm text-muted-foreground mb-3">{item.date}</div>
               <div className="flex items-center gap-2 mb-4">
                 <Button
                   variant="outline"

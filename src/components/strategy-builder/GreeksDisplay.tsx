@@ -32,7 +32,7 @@ export const GreeksDisplay: React.FC<GreeksDisplayProps> = ({
         {greeks.map((greek) => (
           <div key={greek.label} className="flex items-center justify-between">
             <span className="text-sm text-muted-foreground">{greek.label}</span>
-            <span className={`font-semibold ${greek.color}`}>
+            <span className={`text-sm font-semibold ${greek.color}`}>
               {greek.value > 0 && '+'}
               {greek.value}
             </span>
