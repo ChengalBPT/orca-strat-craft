@@ -25,10 +25,10 @@ export const GreeksDisplay: React.FC<GreeksDisplayProps> = ({
   ];
 
   return (
-    <Card className="p-4 h-full">
-      <h3 className="text-lg font-semibold mb-4">Greeks</h3>
+    <Card className="p-6 h-full">
+      <h3 className="text-lg font-semibold mb-6">Greeks</h3>
       
-      <div className="space-y-3">
+      <div className="space-y-6">
         {greeks.map((greek) => (
           <div key={greek.label} className="flex items-center justify-between">
             <span className="text-sm text-muted-foreground">{greek.label}</span>

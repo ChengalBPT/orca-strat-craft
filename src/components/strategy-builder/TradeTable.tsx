@@ -44,37 +44,37 @@ export const TradeTable: React.FC<TradeTableProps> = ({
   return (
     <div className="space-y-4">
       {/* Table Header */}
-      <div className="grid grid-cols-7 gap-1 text-xs font-medium text-muted-foreground border-b pb-2">
-        <div className="min-w-0">B/S</div>
-        <div className="min-w-0">Expiry</div>
-        <div className="min-w-0">Strike</div>
-        <div className="min-w-0">Type</div>
-        <div className="min-w-0">Lots</div>
-        <div className="min-w-0">Price</div>
-        <div className="min-w-0"></div>
+      <div className="grid grid-cols-[60px_100px_80px_50px_80px_80px_40px] gap-3 text-xs font-medium text-muted-foreground border-b pb-3 mb-3">
+        <div>B/S</div>
+        <div>Expiry</div>
+        <div>Strike</div>
+        <div>Type</div>
+        <div>Lots</div>
+        <div>Price</div>
+        <div></div>
       </div>
 
       {/* Trade Rows */}
       {trades.map((trade) => (
-        <div key={trade.id} className="grid grid-cols-7 gap-1 items-center py-2 border-b border-border/50 relative">
-          <div className="min-w-0">
-            <span className={`text-xs font-medium whitespace-nowrap ${
+        <div key={trade.id} className="grid grid-cols-[60px_100px_80px_50px_80px_80px_40px] gap-3 items-center py-3 border-b border-border/50 relative">
+          <div>
+            <span className={`text-xs font-medium ${
               trade.side === 'BUY' ? 'text-profit' : 'text-loss'
             }`}>
               {trade.side}
             </span>
           </div>
           <div className="text-xs truncate" title={trade.expiry}>{trade.expiry}</div>
-          <div className="text-xs font-medium truncate">{trade.strike}</div>
-          <div className="min-w-0">
-            <span className={`text-xs whitespace-nowrap ${
+          <div className="text-xs font-medium">{trade.strike}</div>
+          <div>
+            <span className={`text-xs ${
               trade.type === 'CE' ? 'text-blue-600' : 'text-purple-600'
             }`}>
               {trade.type}
             </span>
           </div>
-          <div className="min-w-0">
-            <div className="flex items-center border border-border rounded-lg">
+          <div>
+            <div className="flex items-center border border-border rounded-lg w-fit">
               <button
                 onClick={() => onUpdateTrade(trade.id, { lots: Math.max(1, trade.lots - 1) })}
                 className="px-2 py-1 text-xs hover:bg-muted rounded-l-lg"
@@ -93,7 +93,7 @@ export const TradeTable: React.FC<TradeTableProps> = ({
               </button>
             </div>
           </div>
-          <div className="min-w-0">
+          <div>
             <Input
               type="number"
               value={trade.price}
@@ -102,7 +102,7 @@ export const TradeTable: React.FC<TradeTableProps> = ({
               step="0.05"
             />
           </div>
-          <div className="absolute -right-2 top-1/2 -translate-y-1/2">
+          <div className="flex justify-end">
             <Button
               variant="ghost"
               size="sm"
@@ -117,7 +117,7 @@ export const TradeTable: React.FC<TradeTableProps> = ({
 
       {/* Add Trade Form */}
       {showAddForm && (
-        <div className="grid grid-cols-7 gap-1 items-center py-2 border border-border rounded-lg p-3 bg-muted/20">
+        <div className="grid grid-cols-[60px_100px_80px_50px_80px_80px_40px] gap-3 items-center py-3 border border-border rounded-lg p-4 bg-muted/20">
           <Select value={newTrade.side} onValueChange={(value: 'BUY' | 'SELL') => setNewTrade({...newTrade, side: value})}>
             <SelectTrigger className="h-7">
               <SelectValue />
@@ -151,7 +151,7 @@ export const TradeTable: React.FC<TradeTableProps> = ({
             </SelectContent>
           </Select>
           
-          <div className="flex items-center border border-border rounded-lg">
+          <div className="flex items-center border border-border rounded-lg w-fit">
             <button
               onClick={() => setNewTrade({...newTrade, lots: Math.max(1, newTrade.lots - 1)})}
               className="px-2 py-1 text-xs hover:bg-muted rounded-l-lg"

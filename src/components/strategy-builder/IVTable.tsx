@@ -27,17 +27,17 @@ export const IVTable: React.FC = () => {
   };
 
   return (
-    <Card className="p-4 h-full">
-      <h3 className="text-lg font-semibold mb-4">Strikewise IVs</h3>
+    <Card className="p-6 h-full">
+      <h3 className="text-lg font-semibold mb-6">Strikewise IVs</h3>
       
       <div className="h-full flex flex-col">
         {/* IV Entries - Scrollable */}
-        <div className="flex-1 overflow-y-auto space-y-4 pr-2">
+        <div className="flex-1 overflow-y-auto space-y-6 pr-2">
           {ivData.map((item, index) => (
-            <div key={index} className="space-y-2">
+            <div key={index} className="space-y-3">
               <div className="text-sm font-medium">₹{item.strike.toLocaleString()}</div>
               <div className="text-xs text-muted-foreground">{item.date}</div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-3">
                 <Button
                   variant="outline"
                   size="sm"
@@ -65,7 +65,7 @@ export const IVTable: React.FC = () => {
         </div>
 
         {/* Controls - Fixed at bottom */}
-        <div className="pt-4 border-t space-y-3 mt-4">
+        <div className="pt-6 border-t space-y-4 mt-6">
           <div className="flex items-center justify-between">
             <span className="text-sm text-muted-foreground">Multiply by Lot Size</span>
             <Switch 

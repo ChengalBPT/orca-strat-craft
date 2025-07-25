@@ -230,20 +230,20 @@ const StrategyBuilder = () => {
             />
           </div>
 
-          {/* Greeks and IV Table side by side */}
-          <div className="grid grid-cols-2 gap-3">
-            <div className="animate-fade-in-up" style={{ animationDelay: '0.7s' }}>
-              <GreeksDisplay
-                delta={0.52}
-                theta={22.41}
-                decay={0.17}
-                gamma={-0.0013}
-                vega={-1.50}
-              />
-            </div>
-            <div className="animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
-              <IVTable />
-            </div>
+          {/* Greeks */}
+          <div className="animate-fade-in-up" style={{ animationDelay: '0.7s' }}>
+            <GreeksDisplay
+              delta={0.52}
+              theta={22.41}
+              decay={0.17}
+              gamma={-0.0013}
+              vega={-1.50}
+            />
+          </div>
+
+          {/* IV Table */}
+          <div className="animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
+            <IVTable />
           </div>
         </div>
       </div>

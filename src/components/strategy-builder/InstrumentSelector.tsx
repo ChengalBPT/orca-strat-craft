@@ -40,7 +40,7 @@ export const InstrumentSelector: React.FC<InstrumentSelectorProps> = ({
           {/* Symbol Dropdown */}
           <div className="flex items-center">
             <Select value={selectedInstrument} onValueChange={onInstrumentChange}>
-              <SelectTrigger className="border-none shadow-none p-0 h-auto bg-transparent hover:bg-transparent">
+              <SelectTrigger className="border-none shadow-none p-0 h-auto bg-transparent hover:bg-transparent focus:ring-0 focus:ring-offset-0">
                 <div className="flex items-center gap-2">
                   <span className="text-lg font-semibold">{selectedInstrument}</span>
                   <ChevronDown className="h-4 w-4 text-muted-foreground" />
@@ -79,7 +79,7 @@ export const InstrumentSelector: React.FC<InstrumentSelectorProps> = ({
           <Calendar className="h-4 w-4 text-muted-foreground" />
           <span className="text-sm text-muted-foreground">Expiry</span>
           <Select value={selectedExpiry} onValueChange={onExpiryChange}>
-            <SelectTrigger className="border-none shadow-none p-0 h-auto bg-transparent hover:bg-transparent">
+            <SelectTrigger className="border-none shadow-none p-0 h-auto bg-transparent hover:bg-transparent focus:ring-0 focus:ring-offset-0">
               <div className="flex items-center gap-1">
                 <span className="text-sm font-medium">{selectedExpiry}</span>
                 <ChevronDown className="h-3 w-3 text-muted-foreground" />
