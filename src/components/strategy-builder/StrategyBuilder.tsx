@@ -125,10 +125,10 @@ const StrategyBuilder = () => {
         />
       </div>
 
-      {/* Main Content Layout - 40/60 split */}
+      {/* Main Content Layout - 50/50 split */}
       <div className="flex gap-3 h-[calc(100vh-120px)]">
-        {/* Left Column - 40% width, static */}
-        <div className="w-[40%] space-y-3">
+        {/* Left Column - 50% width, static */}
+        <div className="w-[50%] space-y-3">
           {/* Strategy Table */}
           <Card className="p-4 animate-fade-in-up">
             <div className="flex items-center justify-between mb-4">
@@ -187,8 +187,8 @@ const StrategyBuilder = () => {
           </div>
         </div>
 
-        {/* Right Column - 60% width, scrollable */}
-        <div className="w-[60%] overflow-y-auto space-y-3 pr-2">
+        {/* Right Column - 50% width, scrollable */}
+        <div className="w-[50%] overflow-y-auto space-y-3 pr-2">
           {/* Top Row - Overview and Summary side by side */}
           <div className="grid grid-cols-2 gap-3">
             <div className="animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
