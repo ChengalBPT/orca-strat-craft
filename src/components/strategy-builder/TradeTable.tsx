@@ -47,7 +47,7 @@ export const TradeTable: React.FC<TradeTableProps> = ({
       {/* Table */}
       <div className="border rounded-lg overflow-hidden">
         {/* Table Header */}
-        <div className="grid grid-cols-[70px_130px_90px_60px_90px_100px_50px] gap-1 px-4 py-3 bg-muted/50 text-xs font-medium text-muted-foreground border-b">
+        <div className="grid grid-cols-[60px_120px_80px_50px_80px_90px_40px] gap-0 px-4 py-3 bg-muted/50 text-xs font-medium text-muted-foreground border-b">
           <div>B/S</div>
           <div>Expiry</div>
           <div>Strike</div>
@@ -59,7 +59,7 @@ export const TradeTable: React.FC<TradeTableProps> = ({
 
         {/* Trade Rows */}
         {trades.map((trade) => (
-          <div key={trade.id} className="grid grid-cols-[70px_130px_90px_60px_90px_100px_50px] gap-1 px-4 py-3 border-b border-border/50 items-center hover:bg-muted/20">
+          <div key={trade.id} className="grid grid-cols-[60px_120px_80px_50px_80px_90px_40px] gap-0 px-4 py-3 border-b border-border/50 items-center hover:bg-muted/20">
             <div className="flex items-center">
               <span className={`text-xs font-medium ${
                 trade.side === 'BUY' ? 'text-profit' : 'text-loss'
