@@ -94,7 +94,7 @@ export const StrategyPresets: React.FC<StrategyPresetsProps> = ({ onApplyStrateg
     <Card className="p-6">
       <div className="mb-4 flex items-center justify-between">
         <div>
-          <h3 className="text-lg font-semibold">Pick a Ready-Made Strategy to start with</h3>
+          <h3 className="text-lg font-semibold">Ready-Made Strategies</h3>
           <p className="text-sm text-muted-foreground">Choose from popular options strategies</p>
         </div>
         <Button 

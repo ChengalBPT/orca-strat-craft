@@ -43,81 +43,85 @@ export const TradeTable: React.FC<TradeTableProps> = ({
 
   return (
     <div className="space-y-4">
-      {/* Table Header */}
-      <div className="grid grid-cols-[60px_100px_80px_50px_80px_80px_40px] gap-3 text-xs font-medium text-muted-foreground border-b pb-3 mb-3">
-        <div>B/S</div>
-        <div>Expiry</div>
-        <div>Strike</div>
-        <div>Type</div>
-        <div>Lots</div>
-        <div>Price</div>
-        <div></div>
-      </div>
+      {/* Table */}
+      <div className="border rounded-lg overflow-hidden">
+        {/* Table Header */}
+        <div className="grid grid-cols-[80px_1fr_80px_60px_100px_80px_50px] gap-4 px-4 py-3 bg-muted/50 text-xs font-medium text-muted-foreground border-b">
+          <div>B/S</div>
+          <div>Expiry</div>
+          <div>Strike</div>
+          <div>Type</div>
+          <div>Lots</div>
+          <div>Price</div>
+          <div></div>
+        </div>
 
-      {/* Trade Rows */}
-      {trades.map((trade) => (
-        <div key={trade.id} className="grid grid-cols-[60px_100px_80px_50px_80px_80px_40px] gap-3 items-center py-3 border-b border-border/50 relative">
-          <div>
-            <span className={`text-xs font-medium ${
-              trade.side === 'BUY' ? 'text-profit' : 'text-loss'
-            }`}>
-              {trade.side}
-            </span>
-          </div>
-          <div className="text-xs truncate" title={trade.expiry}>{trade.expiry}</div>
-          <div className="text-xs font-medium">{trade.strike}</div>
-          <div>
-            <span className={`text-xs ${
-              trade.type === 'CE' ? 'text-blue-600' : 'text-purple-600'
-            }`}>
-              {trade.type}
-            </span>
-          </div>
-          <div>
-            <div className="flex items-center border border-border rounded-lg w-fit">
-              <button
-                onClick={() => onUpdateTrade(trade.id, { lots: Math.max(1, trade.lots - 1) })}
-                className="px-2 py-1 text-xs hover:bg-muted rounded-l-lg"
-                disabled={trade.lots <= 1}
-              >
-                -
-              </button>
-              <span className="px-2 py-1 text-xs font-medium min-w-[30px] text-center border-x border-border">
-                {trade.lots}
+        {/* Trade Rows */}
+        {trades.map((trade) => (
+          <div key={trade.id} className="grid grid-cols-[80px_1fr_80px_60px_100px_80px_50px] gap-4 px-4 py-3 border-b border-border/50 items-center relative hover:bg-muted/20">
+            <div>
+              <span className={`text-xs font-medium ${
+                trade.side === 'BUY' ? 'text-profit' : 'text-loss'
+              }`}>
+                {trade.side}
               </span>
-              <button
-                onClick={() => onUpdateTrade(trade.id, { lots: trade.lots + 1 })}
-                className="px-2 py-1 text-xs hover:bg-muted rounded-r-lg"
+            </div>
+            <div className="text-xs truncate" title={trade.expiry}>{trade.expiry}</div>
+            <div className="text-xs font-medium">{trade.strike}</div>
+            <div>
+              <span className={`text-xs ${
+                trade.type === 'CE' ? 'text-blue-600' : 'text-purple-600'
+              }`}>
+                {trade.type}
+              </span>
+            </div>
+            <div>
+              <div className="flex items-center border border-border rounded-lg w-fit">
+                <button
+                  onClick={() => onUpdateTrade(trade.id, { lots: Math.max(1, trade.lots - 1) })}
+                  className="px-2 py-1 text-xs hover:bg-muted rounded-l-lg"
+                  disabled={trade.lots <= 1}
+                >
+                  -
+                </button>
+                <span className="px-2 py-1 text-xs font-medium min-w-[30px] text-center border-x border-border">
+                  {trade.lots}
+                </span>
+                <button
+                  onClick={() => onUpdateTrade(trade.id, { lots: trade.lots + 1 })}
+                  className="px-2 py-1 text-xs hover:bg-muted rounded-r-lg"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+            <div>
+              <Input
+                type="number"
+                value={trade.price}
+                onChange={(e) => onUpdateTrade(trade.id, { price: parseFloat(e.target.value) || 0 })}
+                className="h-7 w-full text-xs bg-white"
+                step="0.05"
+              />
+            </div>
+            <div className="flex justify-end">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => onRemoveTrade(trade.id)}
+                className="h-6 w-6 p-0 text-destructive hover:text-destructive hover:bg-destructive/10 rounded-full"
               >
-                +
-              </button>
+                <Trash2 className="h-3 w-3" />
+              </Button>
             </div>
           </div>
-          <div>
-            <Input
-              type="number"
-              value={trade.price}
-              onChange={(e) => onUpdateTrade(trade.id, { price: parseFloat(e.target.value) || 0 })}
-              className="h-7 w-full text-xs bg-white"
-              step="0.05"
-            />
-          </div>
-          <div className="flex justify-end">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => onRemoveTrade(trade.id)}
-              className="h-6 w-6 p-0 text-destructive hover:text-destructive hover:bg-destructive/10 rounded-full"
-            >
-              <Trash2 className="h-3 w-3" />
-            </Button>
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
 
       {/* Add Trade Form */}
       {showAddForm && (
-        <div className="grid grid-cols-[60px_100px_80px_50px_80px_80px_40px] gap-3 items-center py-3 border border-border rounded-lg p-4 bg-muted/20">
+        <div className="border border-border rounded-lg p-4 bg-muted/20 mt-4">
+          <div className="grid grid-cols-[80px_1fr_80px_60px_100px_80px_50px] gap-4 items-center">
           <Select value={newTrade.side} onValueChange={(value: 'BUY' | 'SELL') => setNewTrade({...newTrade, side: value})}>
             <SelectTrigger className="h-7">
               <SelectValue />
@@ -190,6 +194,7 @@ export const TradeTable: React.FC<TradeTableProps> = ({
             >
               Cancel
             </Button>
+          </div>
           </div>
         </div>
       )}

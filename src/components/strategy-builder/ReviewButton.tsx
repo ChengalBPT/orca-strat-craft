@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { CheckCircle, Clock, AlertCircle } from 'lucide-react';
+import { CheckCircle, Clock, AlertCircle, Sparkles } from 'lucide-react';
 import { Trade } from './StrategyBuilder';
 
 interface ReviewButtonProps {
@@ -81,6 +81,7 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({ trades }) => {
             : ''
         }`}
       >
+        <Sparkles className="h-4 w-4" />
         <span>{buttonState.text}</span>
       </Button>
       
