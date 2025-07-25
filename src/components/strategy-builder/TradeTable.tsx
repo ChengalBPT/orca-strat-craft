@@ -47,7 +47,7 @@ export const TradeTable: React.FC<TradeTableProps> = ({
       {/* Table */}
       <div className="border rounded-lg overflow-hidden">
         {/* Table Header */}
-        <div className="grid grid-cols-[70px_130px_90px_60px_90px_100px_50px] gap-3 px-4 py-3 bg-muted/50 text-xs font-medium text-muted-foreground border-b">
+        <div className="grid grid-cols-[70px_130px_90px_60px_90px_100px_50px] gap-1 px-4 py-3 bg-muted/50 text-xs font-medium text-muted-foreground border-b">
           <div>B/S</div>
           <div>Expiry</div>
           <div>Strike</div>
@@ -59,7 +59,7 @@ export const TradeTable: React.FC<TradeTableProps> = ({
 
         {/* Trade Rows */}
         {trades.map((trade) => (
-          <div key={trade.id} className="grid grid-cols-[70px_130px_90px_60px_90px_100px_50px] gap-3 px-4 py-3 border-b border-border/50 items-center hover:bg-muted/20">
+          <div key={trade.id} className="grid grid-cols-[70px_130px_90px_60px_90px_100px_50px] gap-1 px-4 py-3 border-b border-border/50 items-center hover:bg-muted/20">
             <div className="flex items-center">
               <span className={`text-xs font-medium ${
                 trade.side === 'BUY' ? 'text-profit' : 'text-loss'
@@ -70,9 +70,9 @@ export const TradeTable: React.FC<TradeTableProps> = ({
             <div className="flex items-center">
               <Select value={trade.expiry} onValueChange={(value) => onUpdateTrade(trade.id, { expiry: value })}>
                 <SelectTrigger className="h-7 border-0 p-0 text-xs font-normal bg-transparent shadow-none focus:ring-0 hover:bg-transparent [&>svg]:hidden">
-                  <div className="flex items-center justify-between w-full">
+                  <div className="flex items-center gap-1">
                     <span>{trade.expiry}</span>
-                    <ChevronDown className="h-3 w-3 ml-1" />
+                    <ChevronDown className="h-3 w-3" />
                   </div>
                 </SelectTrigger>
                 <SelectContent>
