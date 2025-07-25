@@ -73,7 +73,7 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({ trades }) => {
         onClick={handleReview}
         disabled={buttonState.disabled}
         variant={buttonState.variant}
-        className={`w-full transition-all duration-300 ${
+        className={`rounded-full px-4 py-2 transition-all duration-300 ${
           isReviewed 
             ? 'bg-success hover:bg-success/90' 
             : isLoading 
@@ -81,8 +81,7 @@ export const ReviewButton: React.FC<ReviewButtonProps> = ({ trades }) => {
             : ''
         }`}
       >
-        {buttonState.icon}
-        <span className="ml-2">{buttonState.text}</span>
+        <span>{buttonState.text}</span>
       </Button>
       
       {!hasValidTrades && (

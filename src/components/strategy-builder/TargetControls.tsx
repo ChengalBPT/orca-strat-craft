@@ -114,8 +114,32 @@ export const TargetControls: React.FC<TargetControlsProps> = ({
             </div>
           </div>
           
-          <div className="text-center">
-            <div className="text-xs text-muted-foreground">0 D to expiry</div>
+          <div className="text-left">
+            <div className="text-xs text-muted-foreground mb-2">0 D to expiry</div>
+          </div>
+          
+          <div className="px-2">
+            <Slider
+              value={[12]}
+              onValueChange={(values) => {
+                // Handle time change in 15-minute intervals
+                const timeValue = values[0];
+                const newDate = new Date(targetDate);
+                const hours = Math.floor(timeValue / 4) + 9; // Start from 9 AM
+                const minutes = (timeValue % 4) * 15;
+                newDate.setHours(hours, minutes, 0, 0);
+                onTargetDateChange(newDate);
+              }}
+              max={24} // 6 hours * 4 (15-min intervals) = 24 intervals from 9 AM to 3 PM
+              min={0}
+              step={1}
+              className="w-full"
+            />
+            <div className="flex justify-between text-xs text-muted-foreground mt-1">
+              <span>9:00</span>
+              <span>12:00</span>
+              <span>15:00</span>
+            </div>
           </div>
         </div>
       </Card>

@@ -92,12 +92,21 @@ const getStrategyColor = (name: string) => {
 export const StrategyPresets: React.FC<StrategyPresetsProps> = ({ onApplyStrategy }) => {
   return (
     <Card className="p-6">
-      <div className="mb-4">
-        <h3 className="text-lg font-semibold">Pick a Ready-Made Strategy to start with</h3>
-        <p className="text-sm text-muted-foreground">Choose from popular options strategies</p>
+      <div className="mb-4 flex items-center justify-between">
+        <div>
+          <h3 className="text-lg font-semibold">Pick a Ready-Made Strategy to start with</h3>
+          <p className="text-sm text-muted-foreground">Choose from popular options strategies</p>
+        </div>
+        <Button 
+          size="sm" 
+          className="rounded-full px-6 py-2 text-white font-medium"
+          style={{ backgroundColor: '#1EC088' }}
+        >
+          Build on your own →
+        </Button>
       </div>
       
-      <div className="flex flex-wrap gap-2 justify-center">
+      <div className="flex flex-wrap gap-2">
         {strategies.map((strategy, index) => (
           <Button
             key={index}
@@ -113,16 +122,6 @@ export const StrategyPresets: React.FC<StrategyPresetsProps> = ({ onApplyStrateg
             </span>
           </Button>
         ))}
-      </div>
-      
-      <div className="mt-4 text-center">
-        <Button 
-          size="sm" 
-          className="rounded-full px-6 py-2 text-white font-medium"
-          style={{ backgroundColor: '#1EC088' }}
-        >
-          Build on your own →
-        </Button>
       </div>
     </Card>
   );

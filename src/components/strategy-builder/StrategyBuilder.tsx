@@ -116,18 +116,13 @@ const StrategyBuilder = () => {
   return (
     <div className="min-h-screen bg-background p-3">
       {/* Header */}
-      <div className="flex flex-col lg:flex-row gap-3 mb-3">
-        <div className="flex-1">
-          <InstrumentSelector
-            selectedInstrument={selectedInstrument}
-            selectedExpiry={selectedExpiry}
-            onInstrumentChange={setSelectedInstrument}
-            onExpiryChange={setSelectedExpiry}
-          />
-        </div>
-        <div className="lg:w-auto">
-          <ReviewButton trades={trades} />
-        </div>
+      <div className="mb-3">
+        <InstrumentSelector
+          selectedInstrument={selectedInstrument}
+          selectedExpiry={selectedExpiry}
+          onInstrumentChange={setSelectedInstrument}
+          onExpiryChange={setSelectedExpiry}
+        />
       </div>
 
       {/* Main Content Layout - 40/60 split */}
@@ -136,7 +131,10 @@ const StrategyBuilder = () => {
         <div className="w-[40%] space-y-3">
           {/* Strategy Table */}
           <Card className="p-4 animate-fade-in-up">
-            <h2 className="text-lg font-semibold mb-4 text-foreground">Strategy Builder</h2>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-semibold text-foreground">Trades</h2>
+              <ReviewButton trades={trades} />
+            </div>
             <TradeTable
               trades={trades}
               onAddTrade={addTrade}
@@ -232,20 +230,20 @@ const StrategyBuilder = () => {
             />
           </div>
 
-          {/* Greeks */}
-          <div className="animate-fade-in-up" style={{ animationDelay: '0.7s' }}>
-            <GreeksDisplay
-              delta={0.52}
-              theta={22.41}
-              decay={0.17}
-              gamma={-0.0013}
-              vega={-1.50}
-            />
-          </div>
-
-          {/* IV Table */}
-          <div className="animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
-            <IVTable />
+          {/* Greeks and IV Table side by side */}
+          <div className="grid grid-cols-2 gap-3">
+            <div className="animate-fade-in-up" style={{ animationDelay: '0.7s' }}>
+              <GreeksDisplay
+                delta={0.52}
+                theta={22.41}
+                decay={0.17}
+                gamma={-0.0013}
+                vega={-1.50}
+              />
+            </div>
+            <div className="animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
+              <IVTable />
+            </div>
           </div>
         </div>
       </div>

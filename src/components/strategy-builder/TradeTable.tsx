@@ -44,25 +44,22 @@ export const TradeTable: React.FC<TradeTableProps> = ({
   return (
     <div className="space-y-4">
       {/* Table Header */}
-      <div className="grid grid-cols-8 gap-1 text-xs font-medium text-muted-foreground border-b pb-2">
+      <div className="grid grid-cols-7 gap-1 text-xs font-medium text-muted-foreground border-b pb-2">
         <div className="min-w-0">B/S</div>
         <div className="min-w-0">Expiry</div>
         <div className="min-w-0">Strike</div>
         <div className="min-w-0">Type</div>
         <div className="min-w-0">Lots</div>
         <div className="min-w-0">Price</div>
-        <div className="min-w-0">Premium</div>
         <div className="min-w-0"></div>
       </div>
 
       {/* Trade Rows */}
       {trades.map((trade) => (
-        <div key={trade.id} className="grid grid-cols-8 gap-1 items-center py-2 border-b border-border/50">
+        <div key={trade.id} className="grid grid-cols-7 gap-1 items-center py-2 border-b border-border/50 relative">
           <div className="min-w-0">
-            <span className={`px-1.5 py-0.5 rounded text-xs font-medium whitespace-nowrap ${
-              trade.side === 'BUY' 
-                ? 'bg-profit/10 text-profit' 
-                : 'bg-loss/10 text-loss'
+            <span className={`text-xs font-medium whitespace-nowrap ${
+              trade.side === 'BUY' ? 'text-profit' : 'text-loss'
             }`}>
               {trade.side}
             </span>
@@ -70,41 +67,47 @@ export const TradeTable: React.FC<TradeTableProps> = ({
           <div className="text-xs truncate" title={trade.expiry}>{trade.expiry}</div>
           <div className="text-xs font-medium truncate">{trade.strike}</div>
           <div className="min-w-0">
-            <span className={`px-1.5 py-0.5 rounded text-xs whitespace-nowrap ${
-              trade.type === 'CE' 
-                ? 'bg-blue-100 text-blue-700' 
-                : 'bg-purple-100 text-purple-700'
+            <span className={`text-xs whitespace-nowrap ${
+              trade.type === 'CE' ? 'text-blue-600' : 'text-purple-600'
             }`}>
               {trade.type}
             </span>
           </div>
           <div className="min-w-0">
-            <Input
-              type="number"
-              value={trade.lots}
-              onChange={(e) => onUpdateTrade(trade.id, { lots: parseInt(e.target.value) || 1 })}
-              className="h-7 w-full text-xs"
-              min="1"
-            />
+            <div className="flex items-center border border-border rounded-lg">
+              <button
+                onClick={() => onUpdateTrade(trade.id, { lots: Math.max(1, trade.lots - 1) })}
+                className="px-2 py-1 text-xs hover:bg-muted rounded-l-lg"
+                disabled={trade.lots <= 1}
+              >
+                -
+              </button>
+              <span className="px-2 py-1 text-xs font-medium min-w-[30px] text-center border-x border-border">
+                {trade.lots}
+              </span>
+              <button
+                onClick={() => onUpdateTrade(trade.id, { lots: trade.lots + 1 })}
+                className="px-2 py-1 text-xs hover:bg-muted rounded-r-lg"
+              >
+                +
+              </button>
+            </div>
           </div>
           <div className="min-w-0">
             <Input
               type="number"
               value={trade.price}
               onChange={(e) => onUpdateTrade(trade.id, { price: parseFloat(e.target.value) || 0 })}
-              className="h-7 w-full text-xs"
+              className="h-7 w-full text-xs bg-white"
               step="0.05"
             />
           </div>
-          <div className="text-xs font-medium truncate" title={`₹${(trade.lots * trade.price * 25).toLocaleString()}`}>
-            ₹{(trade.lots * trade.price * 25).toLocaleString()}
-          </div>
-          <div className="min-w-0">
+          <div className="absolute -right-2 top-1/2 -translate-y-1/2">
             <Button
               variant="ghost"
               size="sm"
               onClick={() => onRemoveTrade(trade.id)}
-              className="h-7 w-7 p-0 text-destructive hover:text-destructive hover:bg-destructive/10"
+              className="h-6 w-6 p-0 text-destructive hover:text-destructive hover:bg-destructive/10 rounded-full"
             >
               <Trash2 className="h-3 w-3" />
             </Button>
@@ -114,7 +117,7 @@ export const TradeTable: React.FC<TradeTableProps> = ({
 
       {/* Add Trade Form */}
       {showAddForm && (
-        <div className="grid grid-cols-8 gap-1 items-center py-2 border border-border rounded-lg p-3 bg-muted/20">
+        <div className="grid grid-cols-7 gap-1 items-center py-2 border border-border rounded-lg p-3 bg-muted/20">
           <Select value={newTrade.side} onValueChange={(value: 'BUY' | 'SELL') => setNewTrade({...newTrade, side: value})}>
             <SelectTrigger className="h-7">
               <SelectValue />
@@ -128,14 +131,14 @@ export const TradeTable: React.FC<TradeTableProps> = ({
           <Input
             value={newTrade.expiry}
             onChange={(e) => setNewTrade({...newTrade, expiry: e.target.value})}
-            className="h-7 text-xs"
+            className="h-7 text-xs bg-white"
           />
           
           <Input
             type="number"
             value={newTrade.strike}
             onChange={(e) => setNewTrade({...newTrade, strike: parseInt(e.target.value) || 25000})}
-            className="h-7 text-xs"
+            className="h-7 text-xs bg-white"
           />
           
           <Select value={newTrade.type} onValueChange={(value: 'CE' | 'PE') => setNewTrade({...newTrade, type: value})}>
@@ -148,35 +151,42 @@ export const TradeTable: React.FC<TradeTableProps> = ({
             </SelectContent>
           </Select>
           
-          <Input
-            type="number"
-            value={newTrade.lots}
-            onChange={(e) => setNewTrade({...newTrade, lots: parseInt(e.target.value) || 1})}
-            className="h-7 text-xs"
-            min="1"
-          />
+          <div className="flex items-center border border-border rounded-lg">
+            <button
+              onClick={() => setNewTrade({...newTrade, lots: Math.max(1, newTrade.lots - 1)})}
+              className="px-2 py-1 text-xs hover:bg-muted rounded-l-lg"
+              disabled={newTrade.lots <= 1}
+            >
+              -
+            </button>
+            <span className="px-2 py-1 text-xs font-medium min-w-[30px] text-center border-x border-border">
+              {newTrade.lots}
+            </span>
+            <button
+              onClick={() => setNewTrade({...newTrade, lots: newTrade.lots + 1})}
+              className="px-2 py-1 text-xs hover:bg-muted rounded-r-lg"
+            >
+              +
+            </button>
+          </div>
           
           <Input
             type="number"
             value={newTrade.price}
             onChange={(e) => setNewTrade({...newTrade, price: parseFloat(e.target.value) || 100})}
-            className="h-7 text-xs"
+            className="h-7 text-xs bg-white"
             step="0.05"
           />
           
-          <div className="text-xs truncate">
-            ₹{(newTrade.lots * newTrade.price * 25).toLocaleString()}
-          </div>
-          
           <div className="flex gap-1">
-            <Button onClick={handleAddTrade} size="sm" className="h-7 text-xs px-2">
+            <Button onClick={handleAddTrade} size="sm" className="h-7 text-xs px-2 rounded-full">
               Add
             </Button>
             <Button 
               onClick={() => setShowAddForm(false)} 
               variant="ghost" 
               size="sm" 
-              className="h-7 text-xs px-2"
+              className="h-7 text-xs px-2 rounded-full"
             >
               Cancel
             </Button>
@@ -189,7 +199,7 @@ export const TradeTable: React.FC<TradeTableProps> = ({
         <Button
           onClick={() => setShowAddForm(true)}
           variant="outline"
-          className="w-full h-10 border-dashed hover:bg-muted/50"
+          className="w-full h-10 border-dashed hover:bg-muted/50 rounded-full"
         >
           <Plus className="h-4 w-4 mr-2" />
           Add Trade

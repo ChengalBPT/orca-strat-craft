@@ -25,7 +25,7 @@ export const GreeksDisplay: React.FC<GreeksDisplayProps> = ({
   ];
 
   return (
-    <Card className="p-4">
+    <Card className="p-4 h-full">
       <h3 className="text-lg font-semibold mb-4">Greeks</h3>
       
       <div className="space-y-3">
